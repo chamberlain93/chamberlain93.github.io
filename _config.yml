@@ -1,1 +1,11 @@
-theme: jekyll-theme-time-machine
+# Site settings
+
+title: 伯伦獐
+SEOTitle: 伯伦獐的博客 | Chamberlain Blog
+header-img: img/home-bg-hill.jpg
+email: chamberlainyq@gmail.com
+description: "描述"
+keyword: "伯伦獐, chamberlain"
+url: "https://chamberlain93.github.io"
+baseurl: ""
+...
