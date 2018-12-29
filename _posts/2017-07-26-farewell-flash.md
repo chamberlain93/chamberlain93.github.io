@@ -15,7 +15,7 @@ tags:
 一年半前，我曾和 Flash 作过一次告别。那一次，Adobe Flash Professional CC 被重新命名为了 Adobe Animate CC，宣告着 Flash 作为一个创作工具走到了尽头。
 
 
-![](/img/in-post/post-f-f-weibo.png)
+![](../img/in-post/post-f-f-weibo.png)
 
   
 
@@ -65,19 +65,19 @@ Google 的 NativeClient、Mozilla 的 asm.js 对于 web 追逐 native 性能的�
 我很高兴，Google Chrome、Mozilla Firefox、Microsoft Edge 都能这么写到：
 
 > Flash helped make the web a rich, dynamic experience, and **shaped the modern set of web standards.**  
->   
+>
 > --- "[So long, and thanks for all the Flash](https://blog.chromium.org/2017/07/so-long-and-thanks-for-all-flash.html)" Chromium Blog
 
   
 
 > Over the years, Flash has helped bring the Web to greatness with innovations in media and animation, **which ultimately have been added to the core web platform.**  
->   
+>
 > --- "[Firefox Roadmap for Flash End-of-Life](https://blog.mozilla.org/futurereleases/2017/07/25/firefox-roadmap-flash-end-life/)" Mozilla Blog
 
   
 
 > Flash led the way on the web for rich content, gaming, animations, and media of all kinds, and **inspired many of the current web standards powering HTML5.**  
->   
+>
 > --- "[The End of an Era – Next Steps for Adobe Flash](https://blogs.windows.com/msedgedev/2017/07/25/flash-on-windows-timeline/)" Windows Blog
 
   

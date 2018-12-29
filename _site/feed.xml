@@ -5,9 +5,244 @@
     <description>描述</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 29 Dec 2018 00:26:26 +0800</pubDate>
-    <lastBuildDate>Sat, 29 Dec 2018 00:26:26 +0800</lastBuildDate>
+    <pubDate>Sat, 29 Dec 2018 15:58:22 +0800</pubDate>
+    <lastBuildDate>Sat, 29 Dec 2018 15:58:22 +0800</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>Design pattern of Proxy pattern</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“工欲善其事，必先利其器”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;设计模式在面向对象的代码设计中如果运用的好，可以让我们的代码运行起来更加高效，相反，如果运用的不好，不仅会增加代码的复杂度，而且还会使得系统更加臃肿。下面，我就来简单的聊聊我对代理模式的一些见解。&lt;/p&gt;
+
+&lt;p id=&quot;build&quot;&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
+
+&lt;h3 id=&quot;模式动机&quot;&gt;模式动机&lt;/h3&gt;
+
+&lt;p&gt;在某些情况之下，客户端不想直接引用或者不能直接引用某个类的对象，此时可以通过一个&lt;strong&gt;代理对象&lt;/strong&gt;来实现间接引用，代理对象在两者之间起到了第三者的作用，同时，代理对象还可以隐藏被引用对象的一些功能和添加一些服务，这就是代理模式的初衷。&lt;/p&gt;
+
+&lt;h3 id=&quot;模式定义&quot;&gt;模式定义&lt;/h3&gt;
+
+&lt;p&gt;代理模式在设计模式分类中属于一种结构型模式，给某一个对象提供一个代理，并由代理对象控制对原对象的引用。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/proxy.jpg&quot; alt=&quot;类图如下&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;模式结构&quot;&gt;模式结构&lt;/h3&gt;
+
+&lt;p&gt;代理模式包括以下角色：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Subject：抽象主题角色&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Proxy：代理主题角色&lt;/li&gt;
+  &lt;li&gt;RealSubject：真实主题角色&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;典型的代理模式实现&quot;&gt;典型的代理模式实现&lt;/h4&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Proxy&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Subject&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RealSubject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;realSubject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RealSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;preRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;…&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;preRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;realSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;postRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;postRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;……&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; 
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;模式优缺点&quot;&gt;模式优缺点&lt;/h3&gt;
+
+&lt;h4 id=&quot;优点&quot;&gt;优点&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;代理模式能够协调调用者和被调用者，在一定程度上降低了系统的耦合度。&lt;/li&gt;
+  &lt;li&gt;虚拟代理通过使用一个小对象来代表一个大对象，可以减少系统资源的消耗，对系统进行优化并提高运行速度。&lt;/li&gt;
+  &lt;li&gt;可以控制对真实对象的使用权限。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;缺点&quot;&gt;缺点&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;由于在客户端和真实主题之间增加了代理对象，因此有些类型的代理模式可能会造成请求的处理速度变慢。&lt;/li&gt;
+  &lt;li&gt;实现代理模式需要额外的工作，有些代理模式的实现非常复杂。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;模式应用&quot;&gt;模式应用&lt;/h3&gt;
+
+&lt;p&gt;代理模式在面向对象程序设计中应用非常广泛。&lt;/p&gt;
+
+&lt;h4 id=&quot;远程代理&quot;&gt;远程代理&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;为一个位于不同的地址空间的对象提供一个本地的代理对象，这个不同的地址空间可以是在同一台主机中，也可是在另一台主机中。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;虚拟代理&quot;&gt;虚拟代理&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如果需要创建一个资源消耗较大的对象，先创建一个消耗相对较小的对象来表示，真实对象只在需要时才会被真正创建。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;**EJB、WebService等分布式技术都是代理模式的应用。Spring 框架中的AOP技术也是代理模式的应用，在Spring AOP中应用了动态代理(Dynamic Proxy)技术。 **&lt;/p&gt;
+
+&lt;h4 id=&quot;动态代理&quot;&gt;动态代理&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在传统的代理模式中，客户端通过Proxy调用RealSubject类的&lt;code class=&quot;highlighter-rouge&quot;&gt;request()&lt;/code&gt;方法，同时还在代理类中封装了其他方法(如&lt;code class=&quot;highlighter-rouge&quot;&gt;preRequest()&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;postRequest()&lt;/code&gt;)，可以处理一些其他问题。如果按照这种方法使用代理模式，那么真实主题角色必须是事先已经存在的，并将其作为代理对象的内部成员属性。如果一个真实主题角色必须对应一个代理主题角色，这将导致系统中的类个数急剧增加，&lt;strong&gt;因此需要想办法减少系统中类的个数,主要是减少代理类的个数&lt;/strong&gt;，此外，如何在事先不知道真实主题角色的情况下使用代理主题角色，这都是动态代理需要解决的问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Java动态代理实现相关类位于&lt;code class=&quot;highlighter-rouge&quot;&gt;java.lang.reflect&lt;/code&gt;包，主要涉及两个类：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;InvocationHandler&lt;/code&gt;接口。它是代理实例的调用处理程序实现的接口，该接口中定义了如下方法：&lt;/p&gt;
+
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;invoke&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;proxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Method&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Throwable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;invoke()&lt;/code&gt;方法中第一个参数proxy表示代理类，第二个参数method表示需要代理的方法，第三个参数args表示代理方法的参数数组。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Proxy&lt;/code&gt;类。该类即为动态代理类，该类最常用的方法为：&lt;/p&gt;
+
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;newProxyInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ClassLoader&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;interfaces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;InvocationHandler&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IllegalArgumentException&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;。&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;newProxyInstance()&lt;/code&gt;方法用于根据传入的接口类型interfaces返回一个动态创建的代理类的实例，方法中第一个参数loader表示代理类的类加载器，第二个参数interfaces表示代理类实现的接口列表（与真实主题类的接口列表一致），第三个参数h表示所指派的调用处理程序类。&lt;/p&gt;
+
+    &lt;h4 id=&quot;典型的动态代理模式代码实现&quot;&gt;典型的动态代理模式代码实现&lt;/h4&gt;
+
+    &lt;h5 id=&quot;abstractsubjectjava&quot;&gt;AbstractSubject.java&lt;/h5&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;  public interface AbstractSubject
+  {
+  	public void request();
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;##### RealSubjectA.java&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RealSubjectA&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AbstractSubject&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;	
+  	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+  	&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;真实主题类A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;##### RealSubjectB&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RealSubjectB&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AbstractSubject&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;	
+  	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+  	&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;真实主题类B&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;##### Client.java&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.lang.reflect.InvocationHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.lang.reflect.Proxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Client&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[])&lt;/span&gt;
+  	&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  	&lt;span class=&quot;n&quot;&gt;InvocationHandler&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;AbstractSubject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+      
+      &lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DynamicProxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RealSubjectA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AbstractSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Proxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newProxyInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AbstractSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClassLoader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AbstractSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+      
+      &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;------------------------------&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+      
+      &lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DynamicProxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RealSubjectB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AbstractSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Proxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newProxyInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AbstractSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClassLoader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AbstractSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+  	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; 
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;##### DynamicProxy.java&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;  import java.lang.reflect.InvocationHandler;
+  import java.lang.reflect.InvocationTargetException;
+  import java.lang.reflect.Method;
+  public class DynamicProxy implements InvocationHandler
+  {
+  	private Object obj;
+  	
+  	public DynamicProxy(){}
+  	
+  	public DynamicProxy(Object obj)
+  	{
+     		this.obj=obj;
+     	}
+      public Object invoke(Object proxy, Method method, Object[] args) throws Throwable
+      {
+  		preRequest();
+          method.invoke(obj, args);
+          postRequest();
+          return null;
+      }
+      public void preRequest(){
+      System.out.println(&quot;调用之前！&quot;);
+      }
+      public void postRequest(){
+      System.out.println(&quot;调用之后！&quot;);
+      }
+
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;图片代理&quot;&gt;图片代理&lt;/h4&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;用户通过浏览器访问网页时先不加载真实的大图，而是通过代理对象的方法来进行处理，在代理对象的方法中，先使用一个线程向客户端浏览器加载一个小图片，然后在后台使用另一个线程来调用大图片的加载方法将大图片加载到客户端。当需要浏览大图片时，再将大图片在新网页中显示。如果用户在浏览大图时加载工作还没有完成，可以再启动一个线程来显示相应的提示信息。通过代理技术结合多线程编程将真实图片的加载放到后台来操作，不影响前台图片的浏览。&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;后记&quot;&gt;后记&lt;/h2&gt;
+
+&lt;p&gt;关于代理模式，现在总结如下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;代理模式包含三个角色：抽象主题角色声明了真实主题和代理主题的共同接口；代理主题角色内部包含对真实主题的引用，从而可以在任何时候操作真实主题对象；真实主题角色定义了代理角色所代表的真实对象，在真实主题角色中实现了真实的业务操作，客户端可以通过代理主题角色间接调用真实主题角色中定义的方法。&lt;/li&gt;
+  &lt;li&gt;代理模式的优点在于能够协调调用者和被调用者，在一定程度上降低了系统的耦合度；其缺点在于由于在客户端和真实主题之间增加了代理对象，因此有些类型的代理模式可能会造成请求的处理速度变慢，并且实现代理模式需要额外的工作，有些代理模式的实现非常复杂。&lt;/li&gt;
+  &lt;li&gt;如果需要创建一个资源消耗较大的对象，先创建一个消耗相对较小的对象来表示，真实对象只在需要时才会被真正创建，这个小对象称为虚拟代理。虚拟代理通过使用一个小对象来代表一个大对象，可以减少系统资源的消耗，对系统进行优化并提高运行速度。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 28 Dec 2018 22:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/12/28/Design-pattern-of-Proxy-pattern-2018.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/12/28/Design-pattern-of-Proxy-pattern-2018.html</guid>
+        
+        <category>Design Pattern</category>
+        
+        
+      </item>
     
       <item>
         <title>Vim 与中文输入法</title>
@@ -408,7 +643,7 @@ $\Sigma = \{0, 1\}$，所以「编码」即一个对象的二进制字符串描�
 
 &lt;p&gt;一年半前，我曾和 Flash 作过一次告别。那一次，Adobe Flash Professional CC 被重新命名为了 Adobe Animate CC，宣告着 Flash 作为一个创作工具走到了尽头。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/in-post/post-f-f-weibo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../img/in-post/post-f-f-weibo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;而今天，通过 Chromium 博客 &lt;a href=&quot;https://blog.chromium.org/2017/07/so-long-and-thanks-for-all-flash.html&quot;&gt;So long, and thanks for all the Flash&lt;/a&gt; 我才得知，Adobe 官博在 &lt;a href=&quot;https://blogs.adobe.com/conversations/2017/07/adobe-flash-update.html&quot;&gt;Flash &amp;amp; The Future of Interactive Content&lt;/a&gt; 一文中，宣布将在 2020 年底时停止发布与更新 Flash Player。这一次，意味着 Flash 作为一个平台走到了尽头。&lt;/p&gt;
 
@@ -963,263 +1198,6 @@ Today, we celebrate our Independence Day!&lt;/p&gt;
         <pubDate>Sat, 24 Jun 2017 20:00:00 +0800</pubDate>
         <link>http://localhost:4000/2017/06/24/you-are-slaves.html</link>
         <guid isPermaLink="true">http://localhost:4000/2017/06/24/you-are-slaves.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>How does SW-Precache works?</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://github.com/GoogleChrome/sw-precache&quot;&gt;&lt;em&gt;SW-Precache&lt;/em&gt;&lt;/a&gt; &lt;em&gt;is a great Service Worker tool from Google. It is a node module designed to be&lt;/em&gt; &lt;em&gt;integrated&lt;/em&gt; &lt;em&gt;into your build process and to generate a service worker for you.&lt;/em&gt; &lt;em&gt;Though&lt;/em&gt; &lt;em&gt;you can use sw-precache out of the box, you might still wonder what happens under the hood. There you go, this article is written for you!&lt;/em&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;This post was first published at &lt;a href=&quot;https://medium.com/@Huxpro/how-does-sw-precache-works-2d99c3d3c725&quot;&gt;Medium&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
-
-&lt;p&gt;The core files involving in sw-precache are mainly three:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;service-worker.tmpl  
-lib/  
- ├ sw-precache.js  
- └ functions.js
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sw-precache.js&lt;/code&gt; is the main entry of the module. It reads the configuration, processes parameters, populates the &lt;code class=&quot;highlighter-rouge&quot;&gt;service-worker.tmpl&lt;/code&gt; template and writes the result into specified file. And&lt;code class=&quot;highlighter-rouge&quot;&gt;functions.js&lt;/code&gt; is just a module containing bunch of external functions which would be all injected into the generated service worker file as helpers.&lt;/p&gt;
-
-&lt;p&gt;Since the end effect of sw-precache is performed by the generated service worker file in the runtime, a easy way to get an idea of what happens is by checking out source code inside &lt;code class=&quot;highlighter-rouge&quot;&gt;service-worker.tmpl&lt;/code&gt; . It’s not hard to understand the essentials and I will help you.&lt;/p&gt;
-
-&lt;h2 id=&quot;initialization&quot;&gt;Initialization&lt;/h2&gt;
-
-&lt;p&gt;The generated service worker file (let’s call it &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; for instance) get configuration by text interpolation when &lt;code class=&quot;highlighter-rouge&quot;&gt;sw-precache.js&lt;/code&gt; populating &lt;code class=&quot;highlighter-rouge&quot;&gt;service-worker.tmpl&lt;/code&gt; .&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// service-worker.tmpl  &lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;precacheConfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;%=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;precacheConfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// sw.js  &lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;precacheConfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;  
-  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;js/a.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;3cb4f0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;   
-  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;css/b.css&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;c5a951&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;  
-&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;It’s not difficult to see that it’s a list of relative urls and MD5 hashes. In fact, one thing that &lt;code class=&quot;highlighter-rouge&quot;&gt;sw-precache.js&lt;/code&gt; do in the build time is to calculate hash of each file that it asked to “precache” from &lt;code class=&quot;highlighter-rouge&quot;&gt;staticFileGlobs&lt;/code&gt; parameter.&lt;/p&gt;
-
-&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;precacheConfig&lt;/code&gt; would be transformed into a ES6 Map with structure &lt;code class=&quot;highlighter-rouge&quot;&gt;Map {absoluteUrl =&amp;gt; cacheKey}&lt;/code&gt; as below. Noticed that I omit the origin part (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost&lt;/code&gt;) for short.&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;urlToCacheKeys&lt;/span&gt;  
-&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
-  &lt;span class=&quot;s2&quot;&gt;&quot;http.../js/a.js&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http.../js/a.js?_sw-precache=3cb4f0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;   
-  &lt;span class=&quot;s2&quot;&gt;&quot;http.../css/b.js&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http.../css/b.css?_sw-precache=c5a951&quot;&lt;/span&gt;  
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Instead of using raw URL as the cache key, sw-precache append a &lt;code class=&quot;highlighter-rouge&quot;&gt;_sw-precache=[hash]&lt;/code&gt; to the end of each URL when populating, updating its cache and even fetching these subresouces. Those &lt;code class=&quot;highlighter-rouge&quot;&gt;_sw-precache=[hash]&lt;/code&gt; are what we called &lt;strong&gt;cache-busting parameter*&lt;/strong&gt;. It can prevent service worker from responding and caching out-of-date responses found in browsers’ HTTP cache indefinitely.&lt;/p&gt;
-
-&lt;p&gt;Because each build would re-calculate hashes and re-generate a new &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; with new &lt;code class=&quot;highlighter-rouge&quot;&gt;precacheConfig&lt;/code&gt; containing those new hashes, &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; can now determine the version of each subresources thus decide what part of its cache needs a update. &lt;strong&gt;This is pretty similar with what we commonly do when realizing long-term caching with webpack or gulp-rev, to do a byte-diff ahead of runtime.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;*: Developer can opt out this behaviour with &lt;code class=&quot;highlighter-rouge&quot;&gt;dontCacheBustUrlsMatching&lt;/code&gt; option if they set HTTP caching headers right. More details on &lt;a href=&quot;https://jakearchibald.com/2016/caching-best-practices/&quot;&gt;Jake’s Post&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;on-install&quot;&gt;On Install&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;ServiceWorker gives you an install event. You can use this to get stuff ready, stuff that must be ready before you handle other events.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;During the &lt;code class=&quot;highlighter-rouge&quot;&gt;install&lt;/code&gt; lifecycle, &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; open the cache and get started to populate its cache. One cool thing that it does for you is its &lt;strong&gt;incremental update&lt;/strong&gt; mechanism.&lt;/p&gt;
-
-&lt;p&gt;Sw-precache would search each cache key (the values of &lt;code class=&quot;highlighter-rouge&quot;&gt;urlsToCacheKeys&lt;/code&gt;) in the &lt;code class=&quot;highlighter-rouge&quot;&gt;cachedUrls&lt;/code&gt;, a ES6 Set containing URLs of all requests indexed from current version of cache, and only &lt;code class=&quot;highlighter-rouge&quot;&gt;fetch&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;cache.put&lt;/code&gt; resources couldn’t be found in cache, i.e, never be cached before, thus reuse cached resources as much as possible.&lt;/p&gt;
-
-&lt;p&gt;If you can not fully understand it, don’t worry. We will recap it later, now let’s move on.&lt;/p&gt;
-
-&lt;h2 id=&quot;on-activate&quot;&gt;On Activate&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Once a new ServiceWorker has installed &amp;amp; a previous version isn’t being used, the new one activates, and you get an &lt;code class=&quot;highlighter-rouge&quot;&gt;activate&lt;/code&gt; event. Because the old version is out of the way, it’s a good time to handle schema migrations in IndexedDB and also delete unused caches.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;During activation phase, &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; would compare all existing requests in the cache, named &lt;code class=&quot;highlighter-rouge&quot;&gt;existingRequests&lt;/code&gt; (noticed that it now contains resources just cached on installation phase) with &lt;code class=&quot;highlighter-rouge&quot;&gt;setOfExpectedUrls&lt;/code&gt;, a ES6 Set from the values of &lt;code class=&quot;highlighter-rouge&quot;&gt;urlsToCacheKeys&lt;/code&gt;. And delete any requests not matching from cache.&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// sw.js&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;existingRequests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;existingRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setOfExpectedUrls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;has&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;existingRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cache&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;existingRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;on-fetch&quot;&gt;On Fetch&lt;/h2&gt;
-
-&lt;p&gt;Although the comments in source code have elaborated everything well, I wanna highlight some points during the request intercepting duration.&lt;/p&gt;
-
-&lt;h3 id=&quot;should-respond&quot;&gt;Should Respond?&lt;/h3&gt;
-
-&lt;p&gt;Firstly, we need to determine whether this request was included in our “pre-caching list”. If it was, this request should have been pre-fetched and pre-cached thus we can respond it directly from cache.&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// sw.js*  &lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;      
-&lt;span class=&quot;nx&quot;&gt;shouldRespond&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;urlsToCacheKeys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;has&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Noticed that we are matching raw URLs (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost/js/a.js&lt;/code&gt;) instead of the hashed ones. It prevent us from calculating hashes at runtime, which would have a significant cost. And since we have kept the relationship in &lt;code class=&quot;highlighter-rouge&quot;&gt;urlToCacheKeys&lt;/code&gt; it’s easy to index the hashed one out.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;* In real cases, sw-precache would take &lt;code class=&quot;highlighter-rouge&quot;&gt;ignoreUrlParametersMatching&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;directoryIndex&lt;/code&gt; options into consideration.&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;navigation-fallback&quot;&gt;Navigation Fallback&lt;/h3&gt;
-
-&lt;p&gt;One interesting feature that sw-precache provided is &lt;code class=&quot;highlighter-rouge&quot;&gt;navigationFallback&lt;/code&gt;(previously &lt;code class=&quot;highlighter-rouge&quot;&gt;defaultRoute&lt;/code&gt;), which detect navigation request and respond a preset fallback HTML document when the URL of navigation request did not exist in &lt;code class=&quot;highlighter-rouge&quot;&gt;urlsToCacheKeys&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;It is presented for SPA using History API based routing, allowing responding arbitrary URLs with one single HTML entry defined in &lt;code class=&quot;highlighter-rouge&quot;&gt;navigationFallback&lt;/code&gt;, kinda reimplementing a Nginx rewrite in service worker*. Do noticed that service worker only intercept document (navigation request) inside its scope (and any resources referenced in those documents of course). So navigation towards outside scope would not be effected.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;* &lt;code class=&quot;highlighter-rouge&quot;&gt;navigateFallbackWhitelist&lt;/code&gt; can be provided to limit the “rewrite” scope.&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;respond-fromcache&quot;&gt;Respond from Cache&lt;/h3&gt;
-
-&lt;p&gt;Finally, we get the appropriate cache key (the hashed URL) by raw URL with &lt;code class=&quot;highlighter-rouge&quot;&gt;urlsToCacheKeys&lt;/code&gt; and invoke &lt;code class=&quot;highlighter-rouge&quot;&gt;event.respondWith()&lt;/code&gt; to respond requests from cache directly. Done!&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// sw.js*&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;respondWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;caches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cacheName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cache&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cache&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;urlsToCacheKeys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;* The code was “ES6-fied” with error handling part removed.&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;cache-management-recap&quot;&gt;Cache Management Recap&lt;/h2&gt;
-
-&lt;p&gt;That’s recap the cache management part with a full lifecycle simulation.&lt;/p&gt;
-
-&lt;h3 id=&quot;the-firstbuild&quot;&gt;The first build&lt;/h3&gt;
-
-&lt;p&gt;Supposed we are in the very first load, the &lt;code class=&quot;highlighter-rouge&quot;&gt;cachedUrls&lt;/code&gt; would be a empty set thus all subresources listed to be pre-cached would be fetched and put into cache on SW install time.&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// cachedUrls  &lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// urlToCacheKeys  &lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
-  &lt;span class=&quot;s2&quot;&gt;&quot;http.../js/a.js&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http.../js/a.js?_sw-precache=3cb4f0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;   
-  &lt;span class=&quot;s2&quot;&gt;&quot;http.../css/b.js&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http.../css/b.css?_sw-precache=c5a951&quot;&lt;/span&gt;  
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// SW Network Logs  &lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GET&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_sw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precache&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cb4f0&lt;/span&gt;      
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GET&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;css&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_sw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precache&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;c5a951&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;After that, it will start to control the page immediately because the &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; would call &lt;code class=&quot;highlighter-rouge&quot;&gt;clients.claim()&lt;/code&gt; by default. It means the &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; will start to intercept and try to serve future fetches from caches, so it’s good for performance.&lt;/p&gt;
-
-&lt;p&gt;In the second load, all subresouces have been cached and will be served directly from cache. So none requests are sent from &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// cachedUrls  &lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
-  &lt;span class=&quot;s2&quot;&gt;&quot;http.../js/a.js? _sw-precache=3cb4f0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;   
-  &lt;span class=&quot;s2&quot;&gt;&quot;http.../css/b.css? _sw-precache=c5a951&quot;&lt;/span&gt;  
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// urlToCacheKeys  &lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
-  &lt;span class=&quot;s2&quot;&gt;&quot;http.../js/a.js&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http.../js/a.js? _sw-precache=3cb4f0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;   
-  &lt;span class=&quot;s2&quot;&gt;&quot;http.../css/b.js&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http.../css/b.css? _sw-precache=c5a951&quot;&lt;/span&gt;  
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// SW Network Logs  &lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// Empty&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;the-secondbuild&quot;&gt;The second build&lt;/h3&gt;
-
-&lt;p&gt;Once we create a byte-diff of our subresouces (e.g., we modify &lt;code class=&quot;highlighter-rouge&quot;&gt;a.js&lt;/code&gt; to a new version with hash value &lt;code class=&quot;highlighter-rouge&quot;&gt;d6420f&lt;/code&gt;) and re-run the build process, a new version of &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; would be also generated.&lt;/p&gt;
-
-&lt;p&gt;The new &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; would run alongside with the existing one, and start its own installation phase.&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// cachedUrls  &lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
-  &lt;span class=&quot;s2&quot;&gt;&quot;http.../js/a.js? _sw-precache=3cb4f0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;   
-  &lt;span class=&quot;s2&quot;&gt;&quot;http.../css/b.css? _sw-precache=c5a951&quot;&lt;/span&gt;  
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// urlToCacheKeys  &lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
-  &lt;span class=&quot;s2&quot;&gt;&quot;http.../js/a.js&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http.../js/a.js? _sw-precache=d6420f&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;   
-  &lt;span class=&quot;s2&quot;&gt;&quot;http.../css/b.js&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http.../css/b.css? _sw-precache=c5a951&quot;&lt;/span&gt;  
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// SW Network Logs  &lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GET&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_sw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precache&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d6420f&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This time, &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; see that there is a new version of &lt;code class=&quot;highlighter-rouge&quot;&gt;a.js&lt;/code&gt; requested, so it fetch &lt;code class=&quot;highlighter-rouge&quot;&gt;/js/a.js?_sw-precache=d6420f&lt;/code&gt;  and put the response into cache. In fact, we have two versions of &lt;code class=&quot;highlighter-rouge&quot;&gt;a.js&lt;/code&gt; in cache at the same time in this moment.&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// what's in cache?&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_sw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precache&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cb4f0&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_sw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precache&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d6420f&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;css&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;css&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_sw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precache&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;c5a951&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;By default, &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; generated by sw-precache would call &lt;code class=&quot;highlighter-rouge&quot;&gt;self.skipWaiting&lt;/code&gt; so it would take over the page and move onto activating phase immediately.&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// existingRequests&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_sw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precache&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cb4f0&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_sw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precache&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d6420f&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;css&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;css&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_sw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precache&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;c5a951&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// setOfExpectedUrls&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;s2&quot;&gt;&quot;http.../js/a.js?_sw-precache=d6420f&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-  &lt;span class=&quot;s2&quot;&gt;&quot;http.../css/b.css?_sw-precache=c5a951&quot;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// the one deleted&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_sw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precache&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cb4f0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;By comparing existing requests in the cache with set of expected ones, the old version of &lt;code class=&quot;highlighter-rouge&quot;&gt;a.js&lt;/code&gt; would be deleted from cache. This ensure there is only one version of our site’s resources each time.&lt;/p&gt;
-
-&lt;p&gt;That’s it! We finish the simulation successfully.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h2&gt;
-
-&lt;p&gt;As its name implied, sw-precache is designed specifically for the needs of precaching some critical static resources. It only does one thing but does it well. I’d love to give you some opinionated suggestions but you decide whether your requirements suit it or not.&lt;/p&gt;
-
-&lt;h3 id=&quot;precaching-is-notfree&quot;&gt;Precaching is NOT free&lt;/h3&gt;
-
-&lt;p&gt;So don’t precached everything. Sw-precache use a &lt;a href=&quot;https://jakearchibald.com/2014/offline-cookbook/#on-install-as-a-dependency&quot;&gt;“On Install — as a dependency”&lt;/a&gt; strategy for your precache configs. A huge list of requests would delay the time service worker finishing installing and, in addition, wastes users’ bandwidth and disk space.&lt;/p&gt;
-
-&lt;p&gt;For instance, if you wanna build a offline-capable blogs. You had better not include things like &lt;code class=&quot;highlighter-rouge&quot;&gt;'posts/*.html&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;staticFileGlobs&lt;/code&gt;. It would be a huge disaster to data-sensitive people if you have hundreds of posts. Use a Runtime Caching instead.&lt;/p&gt;
-
-&lt;h3 id=&quot;app-shell&quot;&gt;“App Shell”&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;A helpful analogy is to think of your App Shell as the code and resources that would be published to an app store for a native iOS or Android application.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Though I always consider that the term “App Shell” is too narrow to cover its actual usages now, It is widely used and commonly known. I personally prefer calling them &lt;strong&gt;“Web Installation Package”&lt;/strong&gt; straightforward because they can be truly installed into users’ disks and our web app can boot up directly from them in any network environments. The only difference between “Web Installation Package” and iOS/Android App is that we need strive to limit it within a reasonable size.&lt;/p&gt;
-
-&lt;p&gt;Precaching is perfect for this kinda resources such as entry html, visual placeholders, offline pages etc., because they can be static in one version, small-sized, and most importantly, part of critical rendering path. We wanna put first meaningful paint ASAP to our user thus we precache them to eliminate HTTP roundtrip time.&lt;/p&gt;
-
-&lt;p&gt;BTW, if you are using HTML5 Application Cache before, sw-precache is really a perfect replacement because it can cover nearly all use cases the App Cache provide.&lt;/p&gt;
-
-&lt;h3 id=&quot;this-is-not-theend&quot;&gt;This is not the end&lt;/h3&gt;
-
-&lt;p&gt;Sw-precache is just one of awesome tools that can help you build service worker. If you are planing to add some service worker power into your website, Don’t hesitate to checkout sw-toolbox, sw-helper (a new tool Google is working on) and many more from communities.&lt;/p&gt;
-
-&lt;p&gt;That’s all. Wish you enjoy!&lt;/p&gt;
-</description>
-        <pubDate>Sun, 28 May 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2017/05/28/sw-precache.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/05/28/sw-precache.html</guid>
-        
-        <category>Web</category>
-        
-        <category>PWA</category>
-        
-        <category>🇬🇧</category>
         
         
       </item>
