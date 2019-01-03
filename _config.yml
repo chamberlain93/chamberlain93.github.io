@@ -8,4 +8,17 @@ description: "描述"
 keyword: "伯伦獐, chamberlain"
 url: "https://chamberlain93.github.io"
 baseurl: ""
-...
+
+plugins: [jekyll-paginate] #分页必须要的。
+
+# Build settings
+paginate: 10              # nums of posts in one page
+
+# Sidebar settings
+sidebar: true
+sidebar-about-description: "每一行代码都能成为焦点,每一种技术都能改变世界。"
+sidebar-avatar: /img/chamberlain.jpg     # use absolute URL.
+
+# Featured Tags
+featured-tags: true  
+featured-condition-size: 1

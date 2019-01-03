@@ -11,33 +11,16 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="「知乎」如何证明不可计算的函数比可计算的函数多？ - 伯伦獐的博客 | Chamberlain Blog">
+    <meta property="og:title" content="伯伦獐的博客 | Chamberlain Blog">
     
-    <meta property="og:type" content="article">
-    <meta property="og:description" content="
-  这篇文章转载自我在知乎上的回答
-
-
-">
-    
-    <meta property="article:published_time" content="2017-12-12T00:00:00Z">
-    
-    
-    <meta property="article:author" content="Hux">
-    
-    
-    <meta property="article:tag" content="知乎">
-    
-    <meta property="article:tag" content="计算机科学">
-    
-    <meta property="article:tag" content="计算理论">
-    
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="如果你想改变世界，首先你要改变自己">
     
     <meta property="og:image" content="http://localhost:4000/img/chamberlain.jpg">
-    <meta property="og:url" content="http://localhost:4000/2017/12/12/uncomputable-funcs.html">
+    <meta property="og:url" content="http://localhost:4000/page4/">
     <meta property="og:site_name" content="伯伦獐的博客 | Chamberlain Blog">
     
-    <title>「知乎」如何证明不可计算的函数比可计算的函数多？ - 伯伦獐的博客 | Chamberlain Blog</title>
+    <title>伯伦獐的博客 | Chamberlain Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -46,7 +29,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2017/12/12/uncomputable-funcs.html">
+    <link rel="canonical" href="http://localhost:4000/page4/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -198,182 +181,295 @@
 </script>
 
 
-    <!-- Image to hack wechat -->
-<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-bg-infinity.jpg" width="0" height="0"> -->
-
-<!-- Post Header -->
+    <!-- Page Header -->
 
 
 
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/img/post-bg-infinity.jpg');
-        background: ;
-    }
 
-    
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, 0.3);
-    }
-    
-</style>
 
-<header class="intro-header" >
 
-    <div class="header-mask"></div>
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                        <a class="tag" href="/archive/?tag=%E7%9F%A5%E4%B9%8E" title="知乎">知乎</a>
-                        
-                        <a class="tag" href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6" title="计算机科学">计算机科学</a>
-                        
-                        <a class="tag" href="/archive/?tag=%E8%AE%A1%E7%AE%97%E7%90%86%E8%AE%BA" title="计算理论">计算理论</a>
-                        
-                    </div>
-                    <h1>「知乎」如何证明不可计算的函数比可计算的函数多？</h1>
-                    
-                    <h2 class="subheading">Why is there more uncomputable functions?</h2>
-                    <span class="meta">Posted by Hux on December 12, 2017</span>
-                </div>
-            </div>
+
+<header class="intro-header" style="background-image: url('/img/home-bg-hill.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="site-heading">
+        
+          <h1>伯伦獐</h1>
+          <span class="subheading">如果你想改变世界，首先你要改变自己</span>
         </div>
+      </div>
     </div>
+  </div>
 </header>
 
 
-
-
-
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <!-- Multi-Lingual -->
-                
-
-				<blockquote>
-  <p>这篇文章转载自<a href="https://www.zhihu.com/question/51508063/answer/275401076">我在知乎上的回答</a></p>
-</blockquote>
-
-<p>严谨的证明的话，可以使用「形式语言」（<a href="https://en.wikipedia.org/wiki/Formal_language">Formal language</a>）来证明：</p>
-
-<p>在可计算理论和计算复杂度理论中，每个「计算问题」都被描述为一个一个「形式语言」，即字符串的集合。比如对于判断一个图是否是无向连通图这个问题：我们可以写为一个描述所有无向连通图的集合：</p>
-
-<script type="math/tex; mode=display">A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\}</script>
-
-<p>由于图灵机只能接受字符串，所以这里的尖括号表示对图的「编码」。出于简单，我们全部使用现实计算机所使用的字母表
-$\Sigma = \{0, 1\}$，所以「编码」即一个对象的二进制字符串描述。</p>
-
-<p>如果我们能构造出一个图灵机来「决定」这个「形式语言」，即可以判断一个「输入」是否属于这个集合（membership 与 non-membership），那么我们可以说我们用「图灵机」描述了一个「算法」来计算这个问题，而这个「计算问题」所对应的函数是「可计算的」，否则是「不可计算的」。（注 1）</p>
-
-<p>那么，如果我们有一个包含了所有「可计算函数」的集合，这个集合会有多大呢？</p>
-
-<p><br /></p>
-
-<p>由于</p>
-
-<ul>
-  <li>所有「可计算函数」总有一个对应的「图灵机」来计算它</li>
-  <li>每一个「图灵机」都可以被「编码」为一个不同的 0、1 序列，比如 000，010…</li>
-  <li>0、1 序列、即二进制，总是可以被转换为一个十进制数的</li>
-</ul>
-
-<p>所以，我们这个集合实际上是与整数集 $Z$ 一样大（等势）的，我们把这个集合表示为 $\Sigma^{*}$。 易知 $Z$ 是「无穷可数（countably infinite）」的，所以我们有无穷可数个「可计算函数」（注 2）。</p>
-
-<p><br /></p>
-
-<p>而「计算问题」有多少个呢？</p>
-
-<p>这个问题可以等同于，我们有多少个形如 $\{000, 010\}$ 这样的 0，1 序列的集合？即 $\Sigma^{*}$ 这个集合有多少个子集？用数学语言描述就是求 $\Sigma^{*}$ 的幂集的势 $| P(\Sigma^{*})|$ 。</p>
-
-<p>由于 $\Sigma^{*}$ 与 $Z$ 是等势的，所以这个问题等价于求 $|P(Z)|$ 的大小。根据 <a href="https://en.wikipedia.org/wiki/Cantor%2527s_theorem">Cantor’s theorem</a>，一个「无穷可数」的集合的幂集是「无穷不可数（uncountably infinite）」的。（注 3）</p>
-
-<p><br /></p>
-
-<p>根据 <a href="https://en.wikipedia.org/wiki/Cantor%2527s_theorem">Cantor’s theorem</a>，「无穷不可数集」要比「无穷可数集」大。</p>
-
-<p>同时，「无穷不可数集」减去「无穷可数集」后仍然是「无穷不可数集」。（注 4）</p>
-
-<p>所以，「不可计算函数集」，即「计算问题集」与「可计算函数集」的差，仍是「无穷不可数集」，仍比是为「无穷可数集」的「可计算函数集」大。</p>
-
-<p>因此，「不可计算的函数」比「可计算的函数」多。</p>
-
-<p>证毕。</p>
-
-<p><br /></p>
-
-<p>注：</p>
-
-<ol>
-  <li>「<a href="https://en.wikipedia.org/wiki/Computable_function">可计算函数</a>」是算法的直觉说法，「<a href="https://en.wikipedia.org/wiki/Church%25E2%2580%2593Turing_thesis">邱奇－图灵论题</a>」猜想任何在算法上可计算的问题同样可以由图灵机计算。但图灵机并不是唯一的计算模型，其他计算模型包括「<a href="https://en.wikipedia.org/wiki/Lambda_calculus">Lambda 算子</a>」、「$\mu$ - <a href="https://en.wikipedia.org/wiki/%25CE%259C-recursive_function">递归函数</a>」等，它们在计算能力上都是与「图灵机」等价的。</li>
-  <li>证明「所有可计算函数」的集合是「无穷可数集」的方式有很多，只要找到任意一个与「自然数集」的「双射」即可</li>
-  <li>也可以直接用康托的对角线法（<a href="https://en.wikipedia.org/wiki/Cantor%2527s_diagonal_argument">Cantor’s diagonal argument</a>）证明「所有计算问题」的集合是「无穷不可数集」</li>
-  <li>可以用反证法得证</li>
-  <li>知乎能用 LaTex 了好评</li>
-  <li><a href="https://en.wikipedia.org/wiki/Aleph_number">Aleph Number - Wikipedia</a></li>
-</ol>
-
-
-                <hr style="visibility: hidden;">
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/2017/12/12/halting-problem.html" data-toggle="tooltip" data-placement="top" title="「知乎」如何通俗地解释停机问题？">
-                        Previous<br>
-                        <span>「知乎」如何通俗地解释停机问题？</span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/2018/06/30/dreamer.html" data-toggle="tooltip" data-placement="top" title="程序员中的梦想家">
-                        Next<br>
-                        <span>程序员中的梦想家</span>
-                        </a>
-                    </li>
-                    
-                </ul>
-                <hr style="visibility: hidden;">
-
-                
-
-                
-            </div>  
-
-    <!-- Side Catalog Container -->
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
         
 
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			
+<div class="post-preview">
+    <a href="/2015/03/25/digital-native.html">
+        <h2 class="post-title">
+            hUX 随想录（一）：Digital native 数字原住民
+        </h2>
+        
+        <h3 class="post-subtitle">
+             两岁的侄女天天叫着手机手机 
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  那是一种与生俱来的天赋，就好像矮人天生擅长舞锤，而精灵则拥有魔法庇护。那些数字时代的原住民们，天生具备着一种操纵数字世界的领悟。
+
+
+前言
+
+从 2010 年 iPhone 4 横空出世席卷中国，到时隔不到半月的 Apple 2015 发布会。短短几年里，身边就几乎再也看不到“非智能手机”的身影了。
+
+想想发布那时（2010.6.8），博主应该还是一个高一小屁孩，等着暑假快点到来。虽然...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on March 25, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/03/10/apple-event-2015.html">
+        <h2 class="post-title">
+            「知乎」如何评价 2015 年 3 月 9 日 Apple 春季发布会？
+        </h2>
+        
+        <h3 class="post-subtitle">
+            聊聊科技与新式奢侈品
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  这篇文章转载自我在知乎上的回答
+
+
+
+    一个 gay，一个 gay-like ，带着 Apple 向着新式奢侈品的方向飞去了。
+    无论是 Apple Watch ，还是 new MacBook，这次发布会都象征着 Apple 更明显的转型。
+    
+    不应该再把 Apple 跟 Microsoft 简单粗暴的对比，它们的受众产生了愈大的差异。两家公司对数字时代有着完...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on March 10, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2014/12/13/wechat-block-kuaidi.html">
+        <h2 class="post-title">
+            「知乎」如何看待微信屏蔽快的打车事件？
+        </h2>
+        
+        <h3 class="post-subtitle">
+            恰有小感。
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  这篇文章转载自我在知乎上的回答
+
+
+
+    唉。今天恰巧有感，过来小聊几句。
+    还是要先声明下：所有言论出自个人，与阿里和我所在的团队无关。
+    
+    
+    正文。
+    
+    应该很多互联网公司都有这项 “福利” —— 加班到X点以后，报销打车费。
+    阿里大约是晚上9点。
+    
+    初进阿里时还不习惯，想着6点下班后，吃个免费晚饭，赶快坐地铁回...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on December 13, 2014
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2014/11/20/responsive-web-design.html">
+        <h2 class="post-title">
+            「知乎」你们觉得响应式好呢，还是手机和PC端分开来写？
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                
+  这篇文章转载自我在知乎上的回答
+
+
+
+	
+		根据你的产品特点，进行两种不同的设计，
+	    根据你的设计需求，选择合适的技术方案。
+    
+    A与B不是硬币的正反面，它们为了解决同一个问题而生，它们是同一种思想的延伸。
+    
+    
+    移动和桌面设计的差别远不止是布局问题。只要有足够的编程量，这些差别是可以通过响应式设计来解决的。事实上，你可以认为如果一种设计不...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on November 20, 2014
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2014/10/01/why-alibaba-ux-sucks.html">
+        <h2 class="post-title">
+            「知乎」为什么阿里系软件体验都不好？
+        </h2>
+        
+        <h3 class="post-subtitle">
+            或许这就是所谓的企业 DNA 
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  这篇文章转载自我在知乎上的回答
+
+
+
+    
+    一言以蔽之，优先级。
+    这个优先级并不是由谁或者哪个Boss定的，而是长期的市场竞争和业务需求下的结果
+    
+    
+    
+        为什么企鹅家的App用户体验较好？
+        
+    
+    企鹅家的主力产品，QQ、微信、QQ音乐、QQ空间 等，多是IM（即时通讯）、SNS（社交网络）、数字娱乐...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on October 1, 2014
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2014/09/04/is-pure-android-better.html">
+        <h2 class="post-title">
+            「知乎」对中国用户而言，Pure Android 是否比 MIUI 或 Flyme 体验更好？
+        </h2>
+        
+        <h3 class="post-subtitle">
+            
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  这篇文章转载自我在知乎上的回答
+
+
+哎呀～不要站队嘛。其实这是一个很有意思的题目，让我们一点点来看
+    
+    哦对，谢妖～。本人是Nexus 5用户，系统当然是Pure Android KitKat啦（臭谷粉！点Down！喂喂喂我还没给结论呢）
+    毕竟是回答问题嘛，先给一个明确的答案：
+    
+    否。（对中国用户而言，Pure Android 并不比 MIUI 或...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on September 4, 2014
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2014/08/16/miui6.html">
+        <h2 class="post-title">
+            「知乎」如何评价 MIUI 6？
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                
+  这篇文章转载自我在知乎上的回答
+
+
+
+    MIUI 6，充满了“借鉴”，iOS 7 版的 Android……
+        米 4，碉堡了，不服跑个分，简直就是 iPhone 4……你们说得这些我一点都不反对。
+    
+    可是，你们对小米的要求太高了。
+    
+    其实小米说到底也不过是一个才初创4年的公司而已，
+    你是指望小米能引领一套新的设计风格？
+   ...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on August 16, 2014
+    </p>
+</div>
+<hr>
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/page3">&larr; Newer Posts</a>
+    </li>
+    
+    
+</ul>
+
+
+    		</div>
     <!-- Sidebar Container -->
             <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
                 <!-- Featured Tags -->
                 
 
 
 <section>
-    
-        <hr class="hidden-sm hidden-xs">
     
     <h5><a href="/archive/">FEATURED TAGS</a></h5>
     <div class="tags">
@@ -471,43 +567,41 @@ $\Sigma = \{0, 1\}$，所以「编码」即一个对象的二进制字符串描�
 </section>
 
 
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+  <hr>
+  <h5><a href="/about/">ABOUT ME</a></h5>
+  <div class="short-about">
+    
+    <img src="/img/chamberlain.jpg" />
+    
+    
+    <p>每一行代码都能成为焦点,每一种技术都能改变世界。</p>
+    
+    <!-- SNS Link -->
+    
+
+
+<ul class="list-inline">
+
+
+  
+  
+  
+  
+  
+  
+  
+</ul>
+  </div>
+</section>
+
                 <!-- Friends Blog -->
                 
-            </div>
-        </div>
-    </div>
-</article>
-
-<!-- add support for mathjax by voleking-->
-
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: {
-      equationNumbers: {
-        autoNumber: "AMS"
-      }
-    },
-    SVG: {
-      scale: 90
-    },
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true,
-    }
-  });
-</script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
-</script>
-
-
-
-
-
-
-
-
+    		</div>
+        
+	</div>
+</div>
 
 
 

@@ -11,33 +11,16 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="「知乎」如何证明不可计算的函数比可计算的函数多？ - 伯伦獐的博客 | Chamberlain Blog">
+    <meta property="og:title" content="伯伦獐的博客 | Chamberlain Blog">
     
-    <meta property="og:type" content="article">
-    <meta property="og:description" content="
-  这篇文章转载自我在知乎上的回答
-
-
-">
-    
-    <meta property="article:published_time" content="2017-12-12T00:00:00Z">
-    
-    
-    <meta property="article:author" content="Hux">
-    
-    
-    <meta property="article:tag" content="知乎">
-    
-    <meta property="article:tag" content="计算机科学">
-    
-    <meta property="article:tag" content="计算理论">
-    
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="如果你想改变世界，首先你要改变自己">
     
     <meta property="og:image" content="http://localhost:4000/img/chamberlain.jpg">
-    <meta property="og:url" content="http://localhost:4000/2017/12/12/uncomputable-funcs.html">
+    <meta property="og:url" content="http://localhost:4000/page2/">
     <meta property="og:site_name" content="伯伦獐的博客 | Chamberlain Blog">
     
-    <title>「知乎」如何证明不可计算的函数比可计算的函数多？ - 伯伦獐的博客 | Chamberlain Blog</title>
+    <title>伯伦獐的博客 | Chamberlain Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -46,7 +29,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2017/12/12/uncomputable-funcs.html">
+    <link rel="canonical" href="http://localhost:4000/page2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -198,182 +181,402 @@
 </script>
 
 
-    <!-- Image to hack wechat -->
-<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-bg-infinity.jpg" width="0" height="0"> -->
-
-<!-- Post Header -->
+    <!-- Page Header -->
 
 
 
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/img/post-bg-infinity.jpg');
-        background: ;
-    }
 
-    
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, 0.3);
-    }
-    
-</style>
 
-<header class="intro-header" >
 
-    <div class="header-mask"></div>
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                        <a class="tag" href="/archive/?tag=%E7%9F%A5%E4%B9%8E" title="知乎">知乎</a>
-                        
-                        <a class="tag" href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6" title="计算机科学">计算机科学</a>
-                        
-                        <a class="tag" href="/archive/?tag=%E8%AE%A1%E7%AE%97%E7%90%86%E8%AE%BA" title="计算理论">计算理论</a>
-                        
-                    </div>
-                    <h1>「知乎」如何证明不可计算的函数比可计算的函数多？</h1>
-                    
-                    <h2 class="subheading">Why is there more uncomputable functions?</h2>
-                    <span class="meta">Posted by Hux on December 12, 2017</span>
-                </div>
-            </div>
+
+<header class="intro-header" style="background-image: url('/img/home-bg-hill.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="site-heading">
+        
+          <h1>伯伦獐</h1>
+          <span class="subheading">如果你想改变世界，首先你要改变自己</span>
         </div>
+      </div>
     </div>
+  </div>
 </header>
 
 
-
-
-
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <!-- Multi-Lingual -->
-                
-
-				<blockquote>
-  <p>这篇文章转载自<a href="https://www.zhihu.com/question/51508063/answer/275401076">我在知乎上的回答</a></p>
-</blockquote>
-
-<p>严谨的证明的话，可以使用「形式语言」（<a href="https://en.wikipedia.org/wiki/Formal_language">Formal language</a>）来证明：</p>
-
-<p>在可计算理论和计算复杂度理论中，每个「计算问题」都被描述为一个一个「形式语言」，即字符串的集合。比如对于判断一个图是否是无向连通图这个问题：我们可以写为一个描述所有无向连通图的集合：</p>
-
-<script type="math/tex; mode=display">A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\}</script>
-
-<p>由于图灵机只能接受字符串，所以这里的尖括号表示对图的「编码」。出于简单，我们全部使用现实计算机所使用的字母表
-$\Sigma = \{0, 1\}$，所以「编码」即一个对象的二进制字符串描述。</p>
-
-<p>如果我们能构造出一个图灵机来「决定」这个「形式语言」，即可以判断一个「输入」是否属于这个集合（membership 与 non-membership），那么我们可以说我们用「图灵机」描述了一个「算法」来计算这个问题，而这个「计算问题」所对应的函数是「可计算的」，否则是「不可计算的」。（注 1）</p>
-
-<p>那么，如果我们有一个包含了所有「可计算函数」的集合，这个集合会有多大呢？</p>
-
-<p><br /></p>
-
-<p>由于</p>
-
-<ul>
-  <li>所有「可计算函数」总有一个对应的「图灵机」来计算它</li>
-  <li>每一个「图灵机」都可以被「编码」为一个不同的 0、1 序列，比如 000，010…</li>
-  <li>0、1 序列、即二进制，总是可以被转换为一个十进制数的</li>
-</ul>
-
-<p>所以，我们这个集合实际上是与整数集 $Z$ 一样大（等势）的，我们把这个集合表示为 $\Sigma^{*}$。 易知 $Z$ 是「无穷可数（countably infinite）」的，所以我们有无穷可数个「可计算函数」（注 2）。</p>
-
-<p><br /></p>
-
-<p>而「计算问题」有多少个呢？</p>
-
-<p>这个问题可以等同于，我们有多少个形如 $\{000, 010\}$ 这样的 0，1 序列的集合？即 $\Sigma^{*}$ 这个集合有多少个子集？用数学语言描述就是求 $\Sigma^{*}$ 的幂集的势 $| P(\Sigma^{*})|$ 。</p>
-
-<p>由于 $\Sigma^{*}$ 与 $Z$ 是等势的，所以这个问题等价于求 $|P(Z)|$ 的大小。根据 <a href="https://en.wikipedia.org/wiki/Cantor%2527s_theorem">Cantor’s theorem</a>，一个「无穷可数」的集合的幂集是「无穷不可数（uncountably infinite）」的。（注 3）</p>
-
-<p><br /></p>
-
-<p>根据 <a href="https://en.wikipedia.org/wiki/Cantor%2527s_theorem">Cantor’s theorem</a>，「无穷不可数集」要比「无穷可数集」大。</p>
-
-<p>同时，「无穷不可数集」减去「无穷可数集」后仍然是「无穷不可数集」。（注 4）</p>
-
-<p>所以，「不可计算函数集」，即「计算问题集」与「可计算函数集」的差，仍是「无穷不可数集」，仍比是为「无穷可数集」的「可计算函数集」大。</p>
-
-<p>因此，「不可计算的函数」比「可计算的函数」多。</p>
-
-<p>证毕。</p>
-
-<p><br /></p>
-
-<p>注：</p>
-
-<ol>
-  <li>「<a href="https://en.wikipedia.org/wiki/Computable_function">可计算函数</a>」是算法的直觉说法，「<a href="https://en.wikipedia.org/wiki/Church%25E2%2580%2593Turing_thesis">邱奇－图灵论题</a>」猜想任何在算法上可计算的问题同样可以由图灵机计算。但图灵机并不是唯一的计算模型，其他计算模型包括「<a href="https://en.wikipedia.org/wiki/Lambda_calculus">Lambda 算子</a>」、「$\mu$ - <a href="https://en.wikipedia.org/wiki/%25CE%259C-recursive_function">递归函数</a>」等，它们在计算能力上都是与「图灵机」等价的。</li>
-  <li>证明「所有可计算函数」的集合是「无穷可数集」的方式有很多，只要找到任意一个与「自然数集」的「双射」即可</li>
-  <li>也可以直接用康托的对角线法（<a href="https://en.wikipedia.org/wiki/Cantor%2527s_diagonal_argument">Cantor’s diagonal argument</a>）证明「所有计算问题」的集合是「无穷不可数集」</li>
-  <li>可以用反证法得证</li>
-  <li>知乎能用 LaTex 了好评</li>
-  <li><a href="https://en.wikipedia.org/wiki/Aleph_number">Aleph Number - Wikipedia</a></li>
-</ol>
-
-
-                <hr style="visibility: hidden;">
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/2017/12/12/halting-problem.html" data-toggle="tooltip" data-placement="top" title="「知乎」如何通俗地解释停机问题？">
-                        Previous<br>
-                        <span>「知乎」如何通俗地解释停机问题？</span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/2018/06/30/dreamer.html" data-toggle="tooltip" data-placement="top" title="程序员中的梦想家">
-                        Next<br>
-                        <span>程序员中的梦想家</span>
-                        </a>
-                    </li>
-                    
-                </ul>
-                <hr style="visibility: hidden;">
-
-                
-
-                
-            </div>  
-
-    <!-- Side Catalog Container -->
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
         
 
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			
+<div class="post-preview">
+    <a href="/2017/05/28/sw-precache.html">
+        <h2 class="post-title">
+            How does SW-Precache works?
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                SW-Precache is a great Service Worker tool from Google. It is a node module designed to be integrated into your build process and to generate a service worker for you. Though you can use sw-precache out of the box, you might still wonder what happens under the hood. There you go, this article is ...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on May 28, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2017/04/06/html-document.html">
+        <h2 class="post-title">
+            「知乎」如何理解 <code>document</code> 对象是 <code>HTMLDocument</code> 的实例？
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Why is <code>document</code> an instance of <code>HTMLDocument</code>?
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  这篇文章转载自我在知乎上的回答
+
+
+谢邀。
+
+首先要理解的是 DOM 是 API，是一组无关编程语言的接口（Interfaces）而非实现（Implementation）。前端平时常说的 DOM 其实只是浏览器通过 ECMAScript（JavaScript）对 DOM 接口的一种实现。
+
+其次要知道的是，DOM 既是为 HTML 制定的，也是为 XML 制定的。而两者各有一些特异的部...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on April 6, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2017/02/09/nextgen-web-pwa.html">
+        <h2 class="post-title">
+            下一代 Web 应用模型 —— Progressive Web App
+        </h2>
+        
+        <h3 class="post-subtitle">
+            The Next Generation Application Model For The Web - Progressive Web App
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  今年 9 月份的时候，《程序员》杂志社就邀请我写一篇关于 PWA 的文章。后来花式拖稿，拖过了 10 月的 QCon，11 月的 GDG DevFest，终于在 12 月把这篇长文熬了出来。几次分享的不成熟，这次的结构算是比较满意了。「 可能是目前中文世界里对 PWA 最全面详细的长文了」，希望你能喜欢。
+本文首发于 CSDN 与《程序员》2017 年 2 月刊，同步发布于 Hux B...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on February 9, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2017/01/09/wechat-miniapp-ux.html">
+        <h2 class="post-title">
+            如何客观地评价「小程序」的体验?
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Wechat Mini-Program vs. the Web, a UX comparison
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  本文首发于我的知乎专栏 The Little Programmer，转载请保留链接 ;)
+
+
+2017 年 1 月 9 号凌晨，看完《星战》回家，发现朋友圈都炸了……原来是「小程序」如约公测（以下简称小程序）。果然贵圈人都睡得晚啊，一个个大半夜了精神得不行。
+
+截图推荐什么的已经漫天都是了，而且连 「推荐小程序的小程序」都已经出现了，我们就直入正题吧，今天笔者不跟你们聊情怀，就聊体验：...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on January 9, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/11/20/sw-101-gdgdf.html">
+        <h2 class="post-title">
+            Service Worker 101「GDG DevFest 2016 北京」
+        </h2>
+        
+        <h3 class="post-subtitle">
+            🎞  Slides:Service Worker 101, Working Offline and Instant Loading (GDG DevFest 2016 Beijing)
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  下滑这里查看更多内容
+
+
+TLDR; It covers lots of cool stuff about Service Worker!
+
+Watching Fullscreen → 
+
+
+    
+    Scanning on mobile
+
+
+Demo Code → 
+
+
+  Hello World of Service Worker
+  Make your own Offli...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on November 20, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/10/20/pwa-qcon2016.html">
+        <h2 class="post-title">
+            Progressive Web Apps，复兴序章「QCon 上海 2016」
+        </h2>
+        
+        <h3 class="post-subtitle">
+            🎞  Slides:Progressive Web Apps, Make Web Great Again. (QCon Shanghai 2016)
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  下滑这里查看更多内容
+
+
+Watching Fullscreen →
+
+Watching Video →
+
+
+    
+    Scanning on mobile
+
+
+Catalog
+
+
+  The State Of Web
+  Rethinking Hybridzation
+  PWA 101
+    
+      Definition
+      Add To HomeScree...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on October 20, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/09/22/the-open-web.html">
+        <h2 class="post-title">
+            Web 在继续离我们远去
+        </h2>
+        
+        <h3 class="post-subtitle">
+            After the release of Wechat Mini-Program
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  本文首发于我的知乎专栏 The Little Programmer，转载请保留链接 ;)
+
+
+今天微信又刷爆了我的朋友圈 —— 小程序，之前传说的应用号。
+
+不过这篇不谈小程序的技术细节，也不去猜测（因为知道得很清楚……），
+
+也不谈小程序会对中国互联网带来什么影响（自有产品经理会来谈……），
+
+我们说说 Web，the Web。
+
+我们常说的 Web，其实是 World Wide W...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on September 22, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/06/05/pwa-in-my-pov.html">
+        <h2 class="post-title">
+            Progressive Web App 之我见
+        </h2>
+        
+        <h3 class="post-subtitle">
+            🎞  Slides:Progressive Web App, in my points of view
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  下滑这里查看更多内容
+
+
+Watching Fullscreen →
+
+
+    
+    Scanning on mobile
+
+
+Catalog
+
+
+  WHAT is Progressive Web App?
+  1 - Installability
+  2 - App Shell
+  3 - Offline
+    
+      SERVICE WORKER!
+    
+  
+...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on June 5, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/02/01/React-vs-Angular2.html">
+        <h2 class="post-title">
+            「译」React vs Angular 2：冰与火之歌
+        </h2>
+        
+        <h3 class="post-subtitle">
+            React versus Angular 2: There Will Be Blood
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  这篇文章转载自我在知乎专栏「前端外刊评论」上发表的文章。
+
+
+Angular 2 已经发布 Beta 版，而且似乎很有信心在 2016 年成为热门框架。是时候进行一场巅峰对决了，我们来看看它如何与 React 这个 2015 年的新宠抗衡。
+
+免责声明：我之前很喜欢使用 Angular 1，不过在 2015 年转到了 React。最近我也在 Pluralsight 上发布了一门关于 R...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on February 1, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/12/28/css-sucks-2015.html">
+        <h2 class="post-title">
+            都 2015 年了，CSS 怎么还是这么糟糕
+        </h2>
+        
+        <h3 class="post-subtitle">
+            🎞  Slides:CSS Still Sucks 2015
+        </h3>
+        
+        <div class="post-content-preview">
+            
+                
+  下滑这里查看更多内容
+
+
+Watching Fullscreen →
+
+
+
+你也可以通过扫描二维码在手机上观看
+
+
+这个 Web Slides 开源在我的 Github 上，欢迎你帮助我完善这个展示文稿，你可以给我提 issue，可以 fork &amp; pull request。如果它能帮助到你了，希望你还能不吝啬 star 一下这个项目
+
+Catalog
+
+
+  Document...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Hux on December 28, 2015
+    </p>
+</div>
+<hr>
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/">&larr; Newer Posts</a>
+    </li>
+    
+    
+    <li class="next">
+        <a href="/page3">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
+
+
+    		</div>
     <!-- Sidebar Container -->
             <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
                 <!-- Featured Tags -->
                 
 
 
 <section>
-    
-        <hr class="hidden-sm hidden-xs">
     
     <h5><a href="/archive/">FEATURED TAGS</a></h5>
     <div class="tags">
@@ -471,43 +674,41 @@ $\Sigma = \{0, 1\}$，所以「编码」即一个对象的二进制字符串描�
 </section>
 
 
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+  <hr>
+  <h5><a href="/about/">ABOUT ME</a></h5>
+  <div class="short-about">
+    
+    <img src="/img/chamberlain.jpg" />
+    
+    
+    <p>每一行代码都能成为焦点,每一种技术都能改变世界。</p>
+    
+    <!-- SNS Link -->
+    
+
+
+<ul class="list-inline">
+
+
+  
+  
+  
+  
+  
+  
+  
+</ul>
+  </div>
+</section>
+
                 <!-- Friends Blog -->
                 
-            </div>
-        </div>
-    </div>
-</article>
-
-<!-- add support for mathjax by voleking-->
-
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: {
-      equationNumbers: {
-        autoNumber: "AMS"
-      }
-    },
-    SVG: {
-      scale: 90
-    },
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true,
-    }
-  });
-</script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
-</script>
-
-
-
-
-
-
-
-
+    		</div>
+        
+	</div>
+</div>
 
 
 
