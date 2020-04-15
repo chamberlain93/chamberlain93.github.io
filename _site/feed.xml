@@ -5,8 +5,8 @@
     <description>描述</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 15 Apr 2020 23:34:11 +0800</pubDate>
-    <lastBuildDate>Wed, 15 Apr 2020 23:34:11 +0800</lastBuildDate>
+    <pubDate>Wed, 15 Apr 2020 23:55:29 +0800</pubDate>
+    <lastBuildDate>Wed, 15 Apr 2020 23:55:29 +0800</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -64,8 +64,8 @@
 &lt;p&gt;总结一下，阻塞与非阻塞的区别在于系统调用是不是会及时返回，同步I/O与异步I/O的区别在于I/O的两个阶段是不是都是非阻塞的。&lt;/p&gt;
 </description>
         <pubDate>Wed, 15 Apr 2020 06:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2020/04/15/I-O-Model.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/04/15/I-O-Model.html</guid>
+        <link>http://localhost:4000/2020/04/15/I-O-Model/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/04/15/I-O-Model/</guid>
         
         <category>Linux</category>
         
@@ -276,8 +276,8 @@
 &lt;p&gt;关于Spring的IOC在结合例子的基础之上理解原理我觉得是至关重要的，在看别人的教程的同时手动实现一些case加深理解，当然要想正真弄明白Spring，还必须仔细研习源码。&lt;/p&gt;
 </description>
         <pubDate>Thu, 03 Jan 2019 22:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/01/03/Spring-IOC.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/01/03/Spring-IOC.html</guid>
+        <link>http://localhost:4000/2019/01/03/Spring-IOC/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/01/03/Spring-IOC/</guid>
         
         <category>Spring</category>
         
@@ -513,8 +513,8 @@
 &lt;/ul&gt;
 </description>
         <pubDate>Fri, 28 Dec 2018 22:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2018/12/28/Design-pattern-of-Proxy-pattern-2018.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/12/28/Design-pattern-of-Proxy-pattern-2018.html</guid>
+        <link>http://localhost:4000/2018/12/28/Design-pattern-of-Proxy-pattern-2018/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/12/28/Design-pattern-of-Proxy-pattern-2018/</guid>
         
         <category>Design Pattern</category>
         
@@ -542,8 +542,8 @@
 &lt;p&gt;不过也算聊胜于无吧，由于我常用 HHKB，能用 vim 操作的一个子集（&lt;code class=&quot;highlighter-rouge&quot;&gt;hjkl&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;o&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;I&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;v&lt;/code&gt; etc.）可能也比按住 &lt;code class=&quot;highlighter-rouge&quot;&gt;Fn&lt;/code&gt; 的方向键好用……&lt;/p&gt;
 </description>
         <pubDate>Sat, 06 Oct 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2018/10/06/vim-cn-im.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/10/06/vim-cn-im.html</guid>
+        <link>http://localhost:4000/2018/10/06/vim-cn-im/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/10/06/vim-cn-im/</guid>
         
         <category>Vim</category>
         
@@ -598,8 +598,8 @@
 
 </description>
         <pubDate>Thu, 27 Sep 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2018/09/27/avoiding-success-at-all-cost.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/09/27/avoiding-success-at-all-cost.html</guid>
+        <link>http://localhost:4000/2018/09/27/avoiding-success-at-all-cost/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/09/27/avoiding-success-at-all-cost/</guid>
         
         <category>Haskell</category>
         
@@ -641,8 +641,8 @@
 &lt;p&gt;&lt;strong&gt;“Welcome to the producer side!”&lt;/strong&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 30 Jun 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2018/06/30/dreamer.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/06/30/dreamer.html</guid>
+        <link>http://localhost:4000/2018/06/30/dreamer/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/06/30/dreamer/</guid>
         
         <category>Facebook</category>
         
@@ -716,8 +716,8 @@ $\Sigma = \{0, 1\}$，所以「编码」即一个对象的二进制字符串描�
 &lt;/ol&gt;
 </description>
         <pubDate>Tue, 12 Dec 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2017/12/12/uncomputable-funcs.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/12/12/uncomputable-funcs.html</guid>
+        <link>http://localhost:4000/2017/12/12/uncomputable-funcs/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/12/12/uncomputable-funcs/</guid>
         
         <category>知乎</category>
         
@@ -859,8 +859,8 @@ $\Sigma = \{0, 1\}$，所以「编码」即一个对象的二进制字符串描�
 &lt;/ul&gt;
 </description>
         <pubDate>Tue, 12 Dec 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2017/12/12/halting-problem.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/12/12/halting-problem.html</guid>
+        <link>http://localhost:4000/2017/12/12/halting-problem/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/12/12/halting-problem/</guid>
         
         <category>知乎</category>
         
@@ -902,8 +902,8 @@ $\Sigma = \{0, 1\}$，所以「编码」即一个对象的二进制字符串描�
 &lt;p&gt;以上。&lt;/p&gt;
 </description>
         <pubDate>Fri, 06 Oct 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2017/10/06/css-complaints.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/10/06/css-complaints.html</guid>
+        <link>http://localhost:4000/2017/10/06/css-complaints/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/10/06/css-complaints/</guid>
         
         <category>Web</category>
         
@@ -990,8 +990,8 @@ Adobe AIR，作为最早借鉴 JRT 将 web 相关技术的 Runtime 植入操作�
 &lt;p&gt;感谢你们，那些「功成身退」的你们。&lt;/p&gt;
 </description>
         <pubDate>Wed, 26 Jul 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2017/07/26/farewell-flash.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/07/26/farewell-flash.html</guid>
+        <link>http://localhost:4000/2017/07/26/farewell-flash/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/26/farewell-flash/</guid>
         
         <category>Web</category>
         
