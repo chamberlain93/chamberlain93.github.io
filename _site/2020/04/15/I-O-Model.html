@@ -11,27 +11,31 @@
     <meta name="theme-color" content="">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Vim 与中文输入法 - 伯伦獐的博客 | Chamberlain Blog">
+    <meta property="og:title" content="Linux中I/O的几种类型 - 伯伦獐的博客 | Chamberlain Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="Update: 我最后还是放弃在 Vim 模式下输入中文了，mental model 的 cost 太重了（
+    <meta property="og:description" content="
+  “穷且益坚 不坠青云之志”
+
 
 ">
     
-    <meta property="article:published_time" content="2018-10-06T00:00:00Z">
+    <meta property="article:published_time" content="2020-04-15T06:00:00Z">
     
     
-    <meta property="article:author" content="Hux">
+    <meta property="article:author" content="Chamberlain">
     
     
-    <meta property="article:tag" content="Vim">
+    <meta property="article:tag" content="Linux">
+    
+    <meta property="article:tag" content="I/O">
     
     
     <meta property="og:image" content="http://localhost:4000/img/chamberlain.jpg">
-    <meta property="og:url" content="http://localhost:4000/2018/10/06/vim-cn-im.html">
+    <meta property="og:url" content="http://localhost:4000/2020/04/15/I-O-Model.html">
     <meta property="og:site_name" content="伯伦獐的博客 | Chamberlain Blog">
     
-    <title>Vim 与中文输入法 - 伯伦獐的博客 | Chamberlain Blog</title>
+    <title>Linux中I/O的几种类型 - 伯伦獐的博客 | Chamberlain Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -40,7 +44,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2018/10/06/vim-cn-im.html">
+    <link rel="canonical" href="http://localhost:4000/2020/04/15/I-O-Model.html">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -71,7 +75,7 @@
 
     <!-- Navigation -->
 
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
 
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -194,7 +198,7 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/home-bg-hill.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-io.png" width="0" height="0"> -->
 
 <!-- Post Header -->
 
@@ -203,14 +207,14 @@
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/home-bg-hill.jpg');
+        background-image: url('/img/post-bg-io.png');
         background: ;
     }
 
     
 </style>
 
-<header class="intro-header style-text" >
+<header class="intro-header" >
 
     <div class="header-mask"></div>
     
@@ -220,13 +224,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=Vim" title="Vim">Vim</a>
+                        <a class="tag" href="/archive/?tag=Linux" title="Linux">Linux</a>
+                        
+                        <a class="tag" href="/archive/?tag=I%2FO" title="I/O">I/O</a>
                         
                     </div>
-                    <h1>Vim 与中文输入法</h1>
+                    <h1>Linux中I/O的几种类型</h1>
                     
-                    <h2 class="subheading">Using Vim with non-english input method</h2>
-                    <span class="meta">Posted by Hux on October 6, 2018</span>
+                    <h2 class="subheading">I/O延续进程生命</h2>
+                    <span class="meta">Posted by Chamberlain on April 15, 2020</span>
                 </div>
             </div>
         </div>
@@ -252,42 +258,69 @@
                 <!-- Multi-Lingual -->
                 
 
-				<p>Update: 我最后还是放弃在 Vim 模式下输入中文了，mental model 的 cost 太重了（</p>
+				<blockquote>
+  <p>“穷且益坚 不坠青云之志”</p>
+</blockquote>
 
-<hr />
+<h2 id="前言">前言</h2>
 
-<p>我相信很多中文世界的 Vimer 都遇到过这个烦恼，在 vim 的 insert 模式时可能突然想输个中文，输完之后会本能的直接 <code class="highlighter-rouge">esc</code> 接 normal 模式操作，结果发现跳出来的是中文输入法……对于 vscode，我一般会在几次错误之后被逼到退出 vscode vim 模式，而对于终端中用的 neovim，就只能尽量不输入中文了。</p>
+<p>计算机的I/O是一个比较抽象的概念，看不见摸不着，但他又是实际存在的，并且在计算机改变世界的过程中发挥了至关重要的作用。<strong><em>巧妇难为无米之炊</em></strong>这句话来形容I/O的作用最合适不过了，再🐂的家庭煮夫没有米也做不出香喷喷的米饭，米饭从无到有需要经历一个漫长的过程，播种、护理、收割…，所以我又要说，大部分情况下应用程序处理问题的大部分时间其实都是花在I/O上，所以处理好I/O对于提高应用程序的性能尤为重要。言归正传，I/O分为两个阶段，一个阶段是<strong>准备数据阶段</strong>，比如从磁盘中读取数据，从网络流中读取数据，从键盘鼠标等外设中读取数据；另一个阶段是将数据从<strong>操作系统内核的缓冲区中拷贝到用户程序的内存地址</strong>中。这里就涉及到了应用程序的内核态和用户态，简而言之就是进程在操作系统中执行的两种状态，内核态用于执行系统调用，用户态用于执行应用程序自身逻辑。这两个阶段目前产生了五种I/O的模式：</p>
 
-<p>为了满足我 1% 用 vim 输入中文的场景（比如写博客），我还是想看看有没有什么解决方案，Google 出来的解决方案基本是：<em>在退出 insert 模式时记住当时的输入法，并自动切换到默认输入法（一般是英文）给 normal 模式用，并且在下一次进入 insert 模式时再切换回来。</em></p>
+<blockquote>
+  <ul>
+    <li><strong>阻塞I/O</strong>：准备数据和拷贝数据都阻塞</li>
+    <li><strong>非阻塞I/O</strong>：准备数据不阻塞，拷贝数据阻塞</li>
+    <li><strong>I/O多路复用</strong>：准备数据不阻塞，拷贝数据阻塞，但是可以处理多个链接</li>
+    <li><strong>信号驱动I/O</strong>：准备数据不阻塞，拷贝数据阻塞</li>
+    <li><strong>异步I/O</strong>：准备数据阶段和拷贝数据阶段均不阻塞</li>
+  </ul>
+</blockquote>
 
-<p>原生 vim 的话，可以使用 <a href="https://github.com/ybian/smartim">smartim</a> 插件，原理是调用 <a href="https://github.com/daipeihust/im-select">im-select</a> 这个 CLI 工具来切换输入法。</p>
+<h2 id="正文">正文</h2>
 
-<p>对于 VSCode-vim 的话，smartim 的移植也在近期的 PR 中被 merge 到了插件里，<a href="https://github.com/VSCodeVim/Vim#use-im-select">详情见文档的这部分配置</a>，需要指定一下默认输入法和 im-select 的 binary 路径就好。</p>
+<h3 id="阻塞io">阻塞I/O</h3>
 
-<hr />
-<p>
-不过实话说，在 vim 中编辑中文的效率和体验和英文比都是大打折扣的。因为中文分词难度太高，不像英文可以简单依靠一个 <code class="highlighter-rouge">split " "</code> 搞定。所以其实无论 vim（<code class="highlighter-rouge">w</code>ord，<code class="highlighter-rouge">b</code>egin，<code class="highlighter-rouge">e</code>nd），emacs 还是操作系统自带的（比如 macOS 中的 <code class="highlighter-rouge">alt + 箭头</code>） 「按词移动」功能对于中文都仅仅是跳转到下一个空格处而已，对于中文来说基本就是下一句了……其他常用操作诸如 <code class="highlighter-rouge">f</code>，<code class="highlighter-rouge">/</code>, <code class="highlighter-rouge">r</code>eplace, <code class="highlighter-rouge">t</code>ill 也都无法很好的工作。</p>
+<p>阻塞I/O的两个阶段应用程序都是阻塞的，当应用程序调用系统调用recvfrom时，操作系统内核会进入数据准备阶段，获取从磁盘网络等外部传输进来的数据，数据准备完毕后，操作系统内核再将数据从内核缓冲区拷贝到用户的内存空间，在这两个过程中，用户程序时被阻塞，什么也干不了。举个简单的例子，服装店和工厂，当服装店的衣服买完了，服装店老板需要通知工厂生产新的服装，然后再把服装运输回来买，这个过程老板首先要去工厂守着，等他们8⃣把服装生产完毕后，在开车运输回来，在这个过程，服装店老板什么也干不了，只能在工厂干等着，等生产完毕在把服装运回来卖。这个场景就是典型的阻塞I/O，工厂生产服装相当于数据准备阶段，运输服装相当于数据拷贝阶段。下图是典型的阻塞I/O流程：</p>
 
-<p>不过也算聊胜于无吧，由于我常用 HHKB，能用 vim 操作的一个子集（<code class="highlighter-rouge">hjkl</code>, <code class="highlighter-rouge">o</code>, <code class="highlighter-rouge">A</code>, <code class="highlighter-rouge">I</code>, <code class="highlighter-rouge">v</code> etc.）可能也比按住 <code class="highlighter-rouge">Fn</code> 的方向键好用……</p>
+<p><img src="/img/in-post/blocking-IO.png" alt="preview" /></p>
+
+<h4 id="非阻塞io">非阻塞I/O</h4>
+
+<p>非阻塞I/O相对于第一步做了一步处理，就是在数据准备阶段不再阻塞，而是通过不断询问的方式确认数据有没有准备好，如果准备好了就将数据拷贝到用户内存空间。回到刚才的例子，意思就是说服装店老板会定时打电话问工厂老板服装有没有生产好，如果生产好了就去工厂运输。这里要注意的是，虽然数据准备阶段不是阻塞的，但是数据准备阶段依然是阻塞的，因此这种I/O依然是同步的。下图是典型的非阻塞I/O流程：</p>
+
+<p><img src="/img/in-post/NONblocking-IO.png" alt="preview" /></p>
+
+<h4 id="io多路复用">I/O多路复用</h4>
+
+<p>I/O多路复用是前两个I/O模式的加强版，大致意思就是通过一个进程管理多个I/O通道，管理方式时轮询加通知，在linux中是通过select，poll，epoll这三个函数区完成这个操作的，当多个I/O中的任何一个通道有数据时，这个负责管理的进程就会通知用户程序拷贝数据，处理数据。再回到刚才那个例子，服装店生意做大了后，货源不在来源于一个工厂，如此下来，店长肯定忙不过来，于是雇佣了一个人去工厂帮他守着或者帮他打电话，当店员得知某一个工厂服装生产好了以后，就会通知店长去运输服装，特别要注意的是，在这个I/O模式下，拷贝数据阶段依然是阻塞的，店长还需要亲自去运输。实质上select、poll、epoll这三个函数干了一件事，就是当数据准备阶段完成后，通知用户进程去拷贝数据，相比上两种I/O模式，这三个函数另外一大优点就是可以处理多个I/O。如下图，是典型的I/O多路复用流程：</p>
+
+<p><img src="/img/in-post/IO-multiplex.png" alt="preview" /></p>
+
+<h4 id="信号驱动io">信号驱动I/O</h4>
+
+<p>信号驱动I/O也是非阻塞的，当在数据准备阶段时，如果数据准备好了，会使用信号的方式通知用户程序去执行拷贝数据的系统调用。回到刚才的例子，信号驱动与非阻塞的区别在于信息获取的方式，信号驱动相当于店长雇佣一个人去工厂守着，当服装准备好了后，会及时通知店长去运输，而非阻塞需要店长不断打电话去询问。从效率上来说，信号驱动I/O更高。</p>
+
+<h4 id="异步io">异步I/O</h4>
+
+<p>I/O的两个阶段都是来源于recvfrom这个系统调用，也就是说只要这两个阶段有一个阶段阻塞了用户进程，我们就认为这个I/O过程是同步的，以上三种I/O模式的第二个阶段都是阻塞的，因此以上三种I/O都是同步的。异步的I/O意思就是两个阶段都不能阻塞用户进程，回到刚才那个例子，异步I/O与nonblocking-I/O只有一个区别，就是当店长发现工厂服装生产好了后，他会雇佣一个人去帮他运输服装或者工厂送货上门，这样一来，自己就不用阻塞在运输服装这个环节。下图是AIO的流程：</p>
+
+<p><img src="/img/in-post/AIO.png" alt="preview" /></p>
+
+<h2 id="后记">后记</h2>
+
+<p>总结一下，阻塞与非阻塞的区别在于系统调用是不是会及时返回，同步I/O与异步I/O的区别在于I/O的两个阶段是不是都是非阻塞的。</p>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/09/27/avoiding-success-at-all-cost.html" data-toggle="tooltip" data-placement="top" title="Avoiding success at all cost">
+                        <a href="/2019/01/03/Spring-IOC.html" data-toggle="tooltip" data-placement="top" title="Spring IOC—依赖注入">
                         Previous<br>
-                        <span>Avoiding success at all cost</span>
+                        <span>Spring IOC—依赖注入</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2018/12/28/Design-pattern-of-Proxy-pattern-2018.html" data-toggle="tooltip" data-placement="top" title="Design pattern of Proxy pattern">
-                        Next<br>
-                        <span>Design pattern of Proxy pattern</span>
-                        </a>
-                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -298,6 +331,20 @@
             </div>  
 
     <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
         
 
     <!-- Sidebar Container -->
@@ -527,6 +574,64 @@
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 
